@@ -15,7 +15,7 @@ class IssuesWidget extends StatelessWidget {
     return BlocBuilder<IssuesCubit, IssuesState>(
       builder: (context, state) {
         if (state.isError != true) {
-          return issue(state, context);
+          return issues(state, context);
         } else {
           return const Center(
             child: Text("Error Fetching Data"),
@@ -25,7 +25,7 @@ class IssuesWidget extends StatelessWidget {
     );
   }
 
-  NotificationListener<ScrollNotification> issue(
+  NotificationListener<ScrollNotification> issues(
       IssuesState state, BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'components/issues_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:githubissues/features/issues/application/cubit/issues_cubit.dart';
+
+import 'components/issues_widget.dart';
 
 class IssuesPage extends StatelessWidget {
   const IssuesPage({super.key});

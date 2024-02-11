@@ -1,9 +1,11 @@
 import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
-import '../../domain/entities/issues.dart';
-import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:githubissues/features/issues/domain/interface/i_Issues_repository.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../domain/entities/issues.dart';
 
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -35,24 +37,28 @@ class IssuesCubit extends Cubit<IssuesState> {
   }
 
   Future<void> fetchIssuesByLabel(String label) async {
-    log("Printing Label $label");
-    if (labelPage == 1) {
-      emit(state.copyWith(issues: []));
+    try {
+      log("Printing Label $label");
+      if (labelPage == 1) {
+        emit(state.copyWith(issues: []));
+      }
+      List<Issue> issues = [];
+
+      issues.addAll(state.issues);
+      emit(state.copyWith(isLoading: true, label: label));
+      final _issueByLabel =
+          await _repo.fetchIssuesByLabel(label, page: labelPage++);
+
+      issues.addAll(_issueByLabel);
+      emit(
+        state.copyWith(
+          isLoading: false,
+          issues: issues,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(isError: true));
     }
-    List<Issue> issues = [];
-
-    issues.addAll(state.issues);
-    emit(state.copyWith(isLoading: true, label: label));
-    final _issueByLabel =
-        await _repo.fetchIssuesByLabel(label, page: labelPage++);
-
-    issues.addAll(_issueByLabel);
-    emit(
-      state.copyWith(
-        isLoading: false,
-        issues: issues,
-      ),
-    );
   }
 
   Future<void> removeLabel() async {
