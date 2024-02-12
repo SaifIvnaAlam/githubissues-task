@@ -8,6 +8,6 @@ class IssuesState with _$IssuesState {
     String? label,
     bool? isError,
   }) = _IssuesState;
-  factory IssuesState.loading() =>
-      const IssuesState(isLoading: true, issues: [], isError: false);
+  factory IssuesState.loading() => const IssuesState(
+      isLoading: true, issues: [], isError: false, label: null);
 }
