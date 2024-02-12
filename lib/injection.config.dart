@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'features/issues/application/cubit/issues_cubit.dart' as _i5;
 import 'features/issues/infarstructure/issues_repository.dart' as _i4;
-import 'features/issues/domain/interface/i_Issues_repository.dart' as _i3;
+import 'features/issues/domain/interface/i_issues_repository.dart' as _i3;
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************

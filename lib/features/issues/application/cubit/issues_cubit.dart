@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:githubissues/features/issues/domain/interface/i_Issues_repository.dart';
-import 'package:injectable/injectable.dart';
-
 import '../../domain/entities/issues.dart';
+import 'package:injectable/injectable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:githubissues/features/issues/domain/interface/i_issues_repository.dart';
 
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
@@ -38,11 +36,11 @@ class IssuesCubit extends Cubit<IssuesState> {
 
   Future<void> fetchIssuesByLabel(String label) async {
     try {
+      List<Issue> issues = [];
       log("Printing Label $label");
       if (labelPage == 1) {
-        emit(state.copyWith(issues: []));
+        emit(state.copyWith(issues: issues));
       }
-      List<Issue> issues = [];
 
       issues.addAll(state.issues);
       emit(state.copyWith(isLoading: true, label: label));
@@ -62,6 +60,10 @@ class IssuesCubit extends Cubit<IssuesState> {
   }
 
   Future<void> removeLabel() async {
-    emit(state.copyWith(issues: [], label: null));
+    log("Removing Label");
+
+    emit(state.copyWith(isLoading: true, issues: [], label: null));
+    labelPage = 1;
+    page = 1;
   }
 }

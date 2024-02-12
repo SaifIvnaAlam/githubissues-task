@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../features/issues/application/cubit/issues_cubit.dart';
 import 'package:githubissues/features/issues/presentation/issues_page.dart';
-import 'package:githubissues/features/issues/domain/interface/i_Issues_repository.dart';
+import 'package:githubissues/features/issues/domain/interface/i_issues_repository.dart';
 
 class App extends StatelessWidget {
   App({super.key});
